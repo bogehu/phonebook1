@@ -15,7 +15,7 @@ public class Application {
 
 
         System.out.println("欢迎!");
-        System.out.println("选择要进行的操作:");
+        System.out.println("请选择您要进行的操作:");
         System.out.println("1,添加联系人");
         System.out.println("2,查找联系人");
         System.out.println("3,删除联系人");
@@ -32,43 +32,19 @@ public class Application {
                 System.out.println("请输入联系人的号码:");
                 newPerson.setPhoneNumber(scanner.nextLine());
                 phoneBook.addPerson(newPerson);
-                System.out.println(newPerson.getName() + "已经添加到电话本!");
-                break;
+                System.out.println(newPerson.getName() + "已经添加到电话本!");break;
             case 2:
                 System.out.println("请输入查找的联系人");
                 input = new Scanner(System.in);
                 Person foundPerson = phoneBook.findPersonByName(input.nextLine());
                 if (foundPerson == null) {
                     System.out.println("未找到联系人");
-                } else {
-                    System.out.println(foundPerson.getName() + ":" + foundPerson.getPhoneNumber());
+                }
+                else{
+                    System.out.print(foundPerson.getName() + ":" + foundPerson.getPhoneNumber());
                 }
                 break;
-            case 3:
-                System.out.println("请输入要删除的联系人");
-                input = new Scanner(System.in);
-                phoneBook.deletePerson(input.nextLine());
-                System.out.println("删除联系人成功");
-                break;
-            case 4:
-                System.out.println("请输入要修改的联系人");
-                input = new Scanner(System.in);
-                Person modifyPerson = phoneBook.findPersonByName(input.nextLine());
-                if (modifyPerson == null) {
-                    System.out.println("未找到联系人");
-                } else {
-                    Scanner scanner1 = new Scanner(System.in);
-                    System.out.println("输入修改后的姓名");
-                    modifyPerson.setName(scanner1.nextLine());
-                    System.out.println("请输入修改后的号码:");
-                    modifyPerson.setPhoneNumber(scanner1.nextLine());
-                    System.out.println("联系人:" + modifyPerson.getName() + "修改成功!");
-                }
-                break;
-
-
             case 5:
-
                 List<Person> persons = phoneBook.loadPersons();
                 for (Person person : persons) {
                     System.out.println("姓名:" + person.getName());
