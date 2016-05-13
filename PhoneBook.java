@@ -1,7 +1,11 @@
 package cn.PhoneBook;
 
+import com.util.db.DBUtils;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by xubt on 4/23/16.
@@ -11,24 +15,32 @@ public class PhoneBook {
     private List<Person> persons = new ArrayList<Person>();
 
     public void addPerson(Person person) throws Exception {
-        if (person == null) {
-            throw new Exception("联系人信息不能为空!");
-        }
-        persons.add(person);
-        System.out.println("添加成功!");
+        DBUtils.AddAPerson(person);
     }
 
-    public List<Person> loadPersons() {
+
+    public List<Person> loadPersons() throws SQLException,ClassNotFoundException{
+        List<Person> persons=DBUtils.loadAllPersons();
         return persons;
     }
 
-    public Person findPersonByName(String name) {
-        for (Person person : persons) {
-            if (person.getName().equals(name)) {
-                return person;
+    public List<Person> findPersonByName(String name)throws ClassNotFoundException, SQLException {
+       List<Person> persons=DBUtils.findAPersonByName(name);
+       return persons;}
+
+
+     public Person editPersonByName(String name,Person person)throws ClassNotFoundException,SQLException{
+        Person newPerson= DBUtils.editAPersonByName(name,person);
+         return newPerson;
+    }
+    public void deletePerson(String name)throws ClassNotFoundException, SQLException {
+                DBUtils.deleteAPerson(name);
             }
         }
-        return null;
-    }
-}
+
+
+
+
+
+
 
